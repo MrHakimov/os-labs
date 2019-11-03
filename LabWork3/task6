@@ -1,0 +1,25 @@
+#!/bin/bash
+average=0
+i=0
+ParentPPid=0
+
+while IFS="" read -r p || [ -n "$p" ]
+do
+  PPid=$(echo "$p" | tr ":" " " | awk '{print $2}' | awk -F= '{print $2}')
+  current=$(echo "$p" | awk '{print $3}' | awk -F= '{print $2}')
+  let i+=1
+  let average+=current
+  if [[ "$ParentPPid" != "$PPid" ]]
+  then
+    if [[ $i -ne 0 ]]
+    then
+        let temp=average/i
+    else
+        temp=average
+    fi
+    printf '%s=%s is %s\n' "Average_Sleeping_Children_of_ParentID" "$ParentPPid" "$temp" >> task5.out
+    i=0
+    average=0
+    ParentPPid=$PPid
+  fi
+done < task5.out
