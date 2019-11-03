@@ -1,0 +1,4 @@
+#!/bin/bash
+grep -h -r -E "ACPI*" /var/log > errors.log
+grep "[A-Za-z0-9_-]+\.[A-Za-z]{1,4}" errors.log
+

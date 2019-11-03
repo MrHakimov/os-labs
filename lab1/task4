@@ -1,0 +1,11 @@
+#!/bin/bash
+read x
+count=0
+
+while [ "$(( x % 2 ))" -eq "1" ]
+do
+	count=$(( count + 1 ))
+	read x
+done
+
+echo "$count"

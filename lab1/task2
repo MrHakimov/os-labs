@@ -1,0 +1,11 @@
+#!/bin/bash
+mx=$1
+for param in "$@"
+do
+	if [[ "$mx" -lt "$param" ]]
+	then
+		mx=$param
+	fi
+done
+
+echo "$mx"

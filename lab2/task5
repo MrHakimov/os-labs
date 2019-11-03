@@ -1,0 +1,12 @@
+#!/bin/bash
+IFS=$'\n'
+lines=$(cat /etc/passwd)
+lines=($lines)
+
+for line in "${lines[@]}"
+do
+    IFS=':'
+    line=($line)
+    printf "%s %s\n" ${line[0]} ${line[2]}
+done | sort -n -k2
+unset IFS

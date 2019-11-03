@@ -1,0 +1,17 @@
+#!/bin/bash
+read -p 'Enter one of the following commands:
+	1 - to open nano
+	2 - to open vi
+	3 - to open links browser
+	4 - to exit menu
+' x
+if [[ "$x" == "1" ]]
+then
+	nano
+elif [[ "$x" == "2" ]]
+then
+	vi
+elif [[ "$x" == "3" ]]
+then
+	links
+fi
