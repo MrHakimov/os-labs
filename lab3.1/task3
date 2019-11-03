@@ -1,0 +1,15 @@
+#!/bin/bash
+ps -e | tail +2 | awk '{print $1}' > task3.out
+IFS=$'\n'
+lines=$(cat task3.out)
+lines=($lines)
+rm task3.out
+for line in "${lines[@]}"
+do
+	res=$(cat /proc/"$line"/cmdline | grep "sbin")
+	if [[ -n "$res" ]]
+	then
+		echo $line >> task3.out
+	fi
+done
+unset IFS
