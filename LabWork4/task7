@@ -1,0 +1,21 @@
+#!/bin/bash
+
+while true;
+do
+read line
+case "$line" in
+    TERM)
+        kill -SIGTERM $(cat task7_stack_trace)
+        exit
+        ;;
+    +)
+        kill -USR1 $(cat task7_stack_trace)
+        ;;
+    [*])
+        kill -USR2 $(cat task7_stack_trace)
+        ;;
+	*)
+	    continue
+	;;		
+esac
+done

@@ -1,0 +1,3 @@
+#!/bin/bash
+nice -n 15 ./task4_silent_script&
+nice -n -15 ./task4_silent_script&

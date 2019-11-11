@@ -1,0 +1,22 @@
+#!/bin/bash
+
+echo $$ > task6_stack_trace
+
+cnt=0
+stayRunning=1
+
+handle() 
+{ 
+	stayRunning=0
+}
+
+trap 'handle' SIGTERM
+
+while (( stayRunning != 0 )) ; 
+do
+        ((cnt=$cnt + 1))
+        sleep 1
+        echo $cnt
+done
+
+echo "Stopped by SIGTERM signal"
