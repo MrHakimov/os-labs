@@ -1,0 +1,23 @@
+#!/bin/bash
+
+line=""
+while read line; do
+    fileToUntrash=$(echo $line | cut -d " " -f 1)
+    fileToDelete=$(echo $line | cut -d " " -f 2)
+    echo "Was deleted: " $fileToDelete
+
+    echo "Are you sure to restore $fileToUntrash ? (y/n)"
+    read answer
+    if [[ "$answer" == "y" ]]; then
+        where="$fileToUntrash"
+        if [[ ! -d "$(dirname "$fileToUntrash")" ]]; then
+        	echo "No directory to restore! Will restore at HOME..."
+        	where = "~/$fileToUntrash"
+        fi
+    	ln "~/.trash/$fileToDelete" $where && rm ~/.trash/$fileToDelete &&
+        {
+      	sed -i "/$fileToDelete/d" ~/.trash.log
+        echo "$fileToUntrash had been restored!"
+        }
+fi
+done < ~/.trash.log
